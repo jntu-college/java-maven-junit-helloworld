@@ -57,7 +57,7 @@ pipeline{
 				expression { branch == 'dev'}
 			}
 			steps{
-				scripts{
+				script{
 					echo "Development code is deploying"
 				}
 			}
@@ -68,7 +68,7 @@ pipeline{
 				expression { branch == 'master'}
 			}
 			steps{
-				scripts{
+				script{
 					echo "Production code is deploying"
 				}
 			}
