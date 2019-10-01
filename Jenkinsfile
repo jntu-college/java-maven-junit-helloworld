@@ -51,5 +51,27 @@ pipeline{
 				}
 			}
 		}
+
+		stage('Dev Code Deployment'){
+			when {
+				expression { branch == 'dev'}
+			}
+			steps{
+				scripts{
+					echo "Development code is deploying"
+				}
+			}
+		}
+
+		stage('Master Code Deployment'){
+			when {
+				expression { branch == 'master'}
+			}
+			steps{
+				scripts{
+					echo "Production code is deploying"
+				}
+			}
+		}
 	}
 }
