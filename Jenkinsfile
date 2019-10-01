@@ -1,5 +1,6 @@
 #!/groovy
 
+def branch
 
 pipeline{
 	agent any
@@ -15,6 +16,11 @@ pipeline{
 		stage('Checkout'){
 			steps{
 				checkout scm
+				script{
+					branch = env.BRANCH_NAME
+					echo "The current branch is ${branch}"
+				}
+				
 			}
 			
 		}
@@ -23,6 +29,7 @@ pipeline{
 			steps{
 				script{
 				sh 'mvn clean compile'
+
 				}
 			}
 			
@@ -41,6 +48,28 @@ pipeline{
 			steps{
 				script{
 					sh 'mvn package'
+				}
+			}
+		}
+
+		stage('Dev Code Deployment'){
+			when {
+				expression { branch == 'dev'}
+			}
+			steps{
+				script{
+					echo "Development code is deploying"
+				}
+			}
+		}
+
+		stage('Master Code Deployment'){
+			when {
+				expression { branch == 'master'}
+			}
+			steps{
+				script{
+					echo "Production code is deploying"
 				}
 			}
 		}
