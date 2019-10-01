@@ -17,7 +17,7 @@ pipeline{
 			steps{
 				checkout scm
 				branch = env.BRANCH_NAME
-				echo "The current branch is ${branch}"
+				echo "The current branch is: ${branch}"
 			}
 			
 		}
