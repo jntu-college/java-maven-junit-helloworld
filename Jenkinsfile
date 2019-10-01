@@ -1,5 +1,6 @@
 #!/groovy
 
+def branch
 
 pipeline{
 	agent any
@@ -15,6 +16,8 @@ pipeline{
 		stage('Checkout'){
 			steps{
 				checkout scm
+				branch = env.BRANCH_NAME
+				echo "The current branch is ${branch}"
 			}
 			
 		}
@@ -23,6 +26,7 @@ pipeline{
 			steps{
 				script{
 				sh 'mvn clean compile'
+
 				}
 			}
 			
