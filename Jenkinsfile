@@ -5,33 +5,44 @@ pipeline{
 	agent any
 	stages{
 		stage('Clean'){
-			echo "Deleting workspace"
-			deleteDir()
+			steps{
+				echo "Deleting workspace"
+				deleteDir()
+			}
+			
 		}
 
 		stage('Checkout'){
-			checkout scm
+			steps{
+				checkout scm
+			}
+			
 		}
 
 		stage('Compile'){
-			script{
+			steps{
+				script{
 				sh 'mvn clean compile'
+				}
 			}
+			
 
 		}
 
 		stage('Testing'){
-			script{
+			steps{
+				script{
 				sh 'mvn test'
+				}
 			}
-
 		}
 
 		stage('Build'){
-			script{
-				sh 'mvn package'
+			steps{
+				script{
+					sh 'mvn package'
+				}
 			}
-
 		}
 	}
 }
